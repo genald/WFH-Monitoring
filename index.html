@@ -35,45 +35,29 @@
                 <div class="card border-0 shadow w-100">
                     <div class="card-body p-4">
                         <h4 class="card-title">Employees</h4>
-                        <table class="table-striped"
-                            data-toggle="table"
-                            data-pagination="true"
-                            data-search="true">
+                        <table class="table table-striped">
                             <thead class="thead-default">
                                 <tr class="bg-dark text-light">
-                                    <th data-sortable="true">Employee</th>
+                                    <th>Employee</th>
                                     <th>Date</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <form>
+                                    <tr>
                                     <td> Manloctao, Genald Christian </td>
-                                    <td> <input type="date" name="date" class="form-control" required> </td>
-                                    <td class="text-center">
-                                        <a href="captures.html" class="btn btn-info text-decoration-none">
-                                            <i class="fas fa-image fa-fw"></i> View Captures
-                                        </a>
+                                    <td>
+                                        <input type="hidden" name="employee" required>
+                                        <input type="date" name="date" class="form-control" required>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td> De Torres, Adrian Clark </td>
-                                    <td> <input type="date" name="date" class="form-control" required> </td>
                                     <td class="text-center">
-                                        <a href="captures.html" class="btn btn-info text-decoration-none">
+                                        <button type="submit" class="btn btn-info text-decoration-none">
                                             <i class="fas fa-image fa-fw"></i> View Captures
-                                        </a>
+                                        </button>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td> Simon Mhiko </td>
-                                    <td> <input type="date" name="date" class="form-control" required> </td>
-                                    <td class="text-center">
-                                        <a href="captures.html" class="btn btn-info text-decoration-none">
-                                            <i class="fas fa-image fa-fw"></i> View Captures
-                                        </a>
-                                    </td>
-                                </tr>
+                                    </tr>
+                                </form>
                             </tbody>
                         </table>
                     </div>
@@ -92,5 +76,7 @@
         <!-- Bootstrap Table -->
         <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
         <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+        
+        <script src="js/preview.js"></script>
     </body>
 </html>

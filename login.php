@@ -1,3 +1,33 @@
+<?php 
+global $status;
+include('config/config.php');
+    if(isset($_POST['submit'])) {
+        
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $sql = "SELECT accountID, password, role from useraccounts where accountID = '$username' ";
+        $conn = connectSql();
+        $result = $conn->query($sql);
+        
+		if (mysqli_num_rows($result)==1) {
+            while ($row = mysqli_fetch_array($result)) {
+                if(password_verify($password, $row['password'])) {
+                    session_start();
+                    $_SESSION['accountID'] = $username;
+                    $_SESSION['role'] = $row['role'];
+                    header('Location: index.php');
+                } else {
+                    $status = "0";
+                }
+            }
+        } else {
+            $status = "0";
+        }
+
+        $conn->close();
+    }
+
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -22,19 +52,25 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="card border-0 shadow h-auto mb-5">
                     <div class="card-body p-5">
-                        <div class="alert alert-danger" role="alert">
-                            <strong>Wrong Username or Password</strong>
-                        </div>
-                        <form>
+                        <?php 
+                        global $status;
+                            if ($status == "0") {
+                                echo '<div class="alert alert-danger" role="alert">';
+                                echo '<strong>Wrong Username or Password</strong>';
+                                echo '</div>';
+                            }
+                        
+                        ?>
+                        <form method="post" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">
                             <div class="form-group mb-4">
                                 <label for="username">Username</label>
                                 <input type="text" name="username" id="username" class="form-control" placeholder="Username">
                             </div>
                             <div class="form-group mb-4">
                                 <label for="password">Password</label>
-                                <input type="text" name="password" id="password" class="form-control" placeholder="Password">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                             </div>
-                            <button type="submit" class="btn btn-info btn-block">Login</button>
+                            <button type="submit" name='submit'class="btn btn-info btn-block">Login</button>
                         </form>
                     </div>
                 </div>

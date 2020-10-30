@@ -1,6 +1,10 @@
 const canvas      = document.createElement("canvas");
 const screenVideo = document.getElementById("screenVideo");
 const cameraVideo = document.getElementById("cameraVideo");
+const noCameraElem   = document.getElementById("no_camera_message");
+const monitoringElem = document.getElementById("monitoring_message");
+var camera_on = false;
+var screen_on = false;
 
 async function startScreenCapture() {
     try {
@@ -10,6 +14,8 @@ async function startScreenCapture() {
             },
             audio: false
         });
+        screen_on = true;
+        monitoringElem.classList.remove('d-none');
     } catch(err) {
         console.error("Error: " + err);
     }
@@ -21,8 +27,10 @@ async function startCameraCapture() {
             video: true,
             audio: false
         });
+        camera_on = true;
+        monitoringElem.classList.remove('d-none');
     } catch(err) {
-        console.error("Error: " + err);
+        noCameraElem.classList.remove('d-none');
     }
 }
 
@@ -67,30 +75,34 @@ window.addEventListener('load', (event) => {
     startScreenCapture();
 
     setInterval(() => {
-        if (screen_random) {
-            let random = Math.floor(Math.random() * 2);
-            if (random) {
-                try {
-                    capture('screen', screenVideo, screen_URL);
-                } catch(err) {
-                    console.error('Error: ' + err)
+        if (screen_on) {
+            if (screen_random) {
+                let random = Math.floor(Math.random() * 2);
+                if (random) {
+                    try {
+                        capture('screen', screenVideo, screen_URL);
+                    } catch(err) {
+                        console.error('Error: ' + err)
+                    }
                 }
             }
+            else capture('screen', screenVideo, screen_URL);
         }
-        else capture('screen', screenVideo, screen_URL);
     }, screen_interval)
     
     setInterval(() => {
-        if (camera_random) {
-            let random = Math.floor(Math.random() * 2);
-            if (random) {
-                try {
-                    capture('camera', cameraVideo, camera_URL);
-                } catch(err) {
-                    console.error('Error: ' + err)
+        if (camera_on) {
+            if (camera_random) {
+                let random = Math.floor(Math.random() * 2);
+                if (random) {
+                    try {
+                        capture('camera', cameraVideo, camera_URL);
+                    } catch(err) {
+                        console.error('Error: ' + err)
+                    }
                 }
             }
+            else capture('screen', screenVideo, screen_URL);
         }
-        else capture('screen', screenVideo, screen_URL);
     }, camera_interval)
 });

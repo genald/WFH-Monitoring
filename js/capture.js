@@ -70,7 +70,11 @@ window.addEventListener('load', (event) => {
         if (screen_random) {
             let random = Math.floor(Math.random() * 2);
             if (random) {
-                capture('screen', screenVideo, screen_URL);
+                try {
+                    capture('screen', screenVideo, screen_URL);
+                } catch(err) {
+                    console.error('Error: ' + err)
+                }
             }
         }
         else capture('screen', screenVideo, screen_URL);
@@ -80,7 +84,11 @@ window.addEventListener('load', (event) => {
         if (camera_random) {
             let random = Math.floor(Math.random() * 2);
             if (random) {
-                capture('camera', cameraVideo, camera_URL);
+                try {
+                    capture('camera', cameraVideo, camera_URL);
+                } catch(err) {
+                    console.error('Error: ' + err)
+                }
             }
         }
         else capture('screen', screenVideo, screen_URL);

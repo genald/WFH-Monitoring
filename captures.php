@@ -31,7 +31,7 @@
 
         <!-- BODY -->
         <div class="container-fluid p-4">
-            <a class="btn btn-link text-decoration-none text-dark" href="index.html">
+            <a class="btn btn-link text-decoration-none text-dark" href="index.php">
                 <i class="fas fa-arrow-left fa-lg fa-fw mr-2"></i> Back
             </a>
             <h4 class="text-center">Manloctao, Genald Christian</h4>

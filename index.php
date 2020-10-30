@@ -36,7 +36,7 @@
                     <i class="fas fa-user-cog fa-lg fa-fw"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </nav>
@@ -58,7 +58,33 @@
                             </thead>
                             <tbody>
                                 <form>
-                                    <tr>
+                                    <?php 
+                                    include('config/config.php');
+                                    $managerID = $_SESSION['accountID'];
+                                    $sql = "SELECT accountID, name from useraccounts where managerID = '$managerID' ";
+                                    $conn = connectSql();
+                                    $result = $conn->query($sql);
+                                    if (mysqli_num_rows($result)>0) {
+                                        while ($row = mysqli_fetch_array($result)) {
+                                            echo "<tr>";
+                                            echo "<td>" . $row['name'] . "</td>";
+                                            echo "<td>";
+                                            echo '<input type="hidden" name="accountID" value="' . $row['accountID'] . '" required>';
+                                            echo '<input type="date" name="date" class="form-control" required>';
+                                            echo '</td>';
+                                            echo '<td class="text-center">';
+                                            echo '<button type="submit" class="btn btn-info text-decoration-none">';
+                                            echo '<i class="fas fa-image fa-fw"></i> View Captures';
+                                            echo '</button>';
+                                            echo '</td>';
+                                            echo '</tr>';
+                                        }
+                                    }
+
+                                    ?>
+
+
+                                    <!-- <tr>
                                     <td> Manloctao, Genald Christian </td>
                                     <td>
                                         <input type="hidden" name="employee" required>
@@ -69,7 +95,7 @@
                                             <i class="fas fa-image fa-fw"></i> View Captures
                                         </button>
                                     </td>
-                                    </tr>
+                                    </tr> -->
                                 </form>
                             </tbody>
                         </table>

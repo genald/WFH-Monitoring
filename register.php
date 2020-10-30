@@ -1,9 +1,15 @@
 <?php
 include('config/config.php');
-$username = "adrian";
+$username = "Aeighy2";
+$name = "de Torres, Adrian Clark";
 $hashed_password = password_hash("wfhPassword", PASSWORD_DEFAULT);
-$sql = "INSERT INTO useraccounts (accountID, name, password, role) VALUES ('Aeighy', 'Adrian', '$hashed_password', 0)";
+$sql = "INSERT INTO useraccounts (accountID, name, password, role, managerID) VALUES ('$username', '$name', '$hashed_password', 0, 'adrian-manager')";
 $conn = connectSql();
-    $result = $conn->query($sql);
-    $conn->close();
+$result = $conn->query($sql);
+$conn->close();
+
+$imageDirectory = 'employees/' . $username;
+    if (!file_exists($imageDirectory)) {
+        mkdir($imageDirectory, 0777, true);
+    }
 ?>

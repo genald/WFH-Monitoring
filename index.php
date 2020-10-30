@@ -64,7 +64,7 @@
                                     $sql = "SELECT accountID, name from useraccounts where managerID = '$managerID' ";
                                     $conn = connectSql();
                                     $result = $conn->query($sql);
-                                    if (mysqli_num_rows($result)==1) {
+                                    if (mysqli_num_rows($result)>0) {
                                         while ($row = mysqli_fetch_array($result)) {
                                             echo "<tr>";
                                             echo "<td>" . $row['name'] . "</td>";

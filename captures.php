@@ -14,14 +14,19 @@ $name;
         $accountID = $_POST['accountID'];
         $employeeDirCamera = 'employees/' . $accountID . "/" .$date . "/cameracapture/";
         $employeeDirScreen = 'employees/' . $accountID . "/" .$date . "/screencapture/";
-        if (is_dir($employeeDirCamera) && is_dir($employeeDirScreen)) {
-            $imageFilesCamera = scandir($employeeDirCamera);
+        if (is_dir($employeeDirScreen)) {
             $imageFilesScreen = scandir($employeeDirScreen);
-        } else {
-            echo "This dude doesn't have anything yet.";
-            exit();
+            $screenCapture = true;
         }
-        // $image = $employeeDir . $imageFiles[2];
+        else {
+            $screenCapture = false;
+        }
+        if (is_dir($employeeDirCamera)) {
+            $imageFilesCamera = scandir($employeeDirCamera);
+            $cameraCapture = true;
+        } else {
+            $cameraCapture = false;
+        }
     }
     
 ?>
@@ -79,16 +84,19 @@ $name;
                         </a> -->
 
                         <?php
-                        foreach ($imageFilesCamera as $k => $v) {
-                            if ($k < 2) continue;
-                            $image = $employeeDirCamera . $imageFilesCamera[$k];
-                        ?>
-                            <a class="card border-0 shadow w-100" onclick='preview("<?php echo $image; ?>")' href="#">
-                            <img class="card-img-top" src=" <?php echo $image; ?>">
-                        </a>
+                        if ($cameraCapture) {
+                            foreach ($imageFilesCamera as $k => $v) {
+                                if ($k < 2) continue;
+                                $image = $employeeDirCamera . $imageFilesCamera[$k];
+                            ?>
+                                <a class="card border-0 shadow w-100" onclick='preview("<?php echo $image; ?>")' href="#">
+                                <img class="card-img-top" src=" <?php echo $image; ?>">
+                            </a>
                         <?php
-                         }
-                         
+                            } 
+                        } else {
+                            echo "No camera Images were captured.";
+                        }  
                         ?>
                         <!-- <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
                             <img class="card-img-top" src="img/image.jfif">
@@ -110,17 +118,21 @@ $name;
                     <div class="card-columns">
                         
                     <?php
-                        foreach ($imageFilesScreen as $k => $v) {
-                            if ($k < 2) continue;
-                            $image = $employeeDirScreen . $imageFilesScreen[$k];
-                        ?>
-                            <a class="card border-0 shadow w-100" onclick='preview("<?php echo $image; ?>")' href="#">
-                            <img class="card-img-top" src=" <?php echo $image; ?>">
-                        </a>
-                        <?php
-                         }
+                        if ($screenCapture) {
+                            foreach ($imageFilesScreen as $k => $v) {
+                                if ($k < 2) continue;
+                                $image = $employeeDirScreen . $imageFilesScreen[$k];
+                            ?>
+                                <a class="card border-0 shadow w-100" onclick='preview("<?php echo $image; ?>")' href="#">
+                                <img class="card-img-top" src=" <?php echo $image; ?>">
+                            </a>
+                    <?php
+                            }
+                        } else {
+                            echo "No Screen capture Images were captured";
+                        }
                          
-                        ?>
+                    ?>
                         <!-- <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
                             <img class="card-img-top" src="img/image.jfif">
                         </a>

@@ -2,11 +2,10 @@
     session_start();
     if (empty($_SESSION['accountID'])) {
         header('Location: login.php');
-    } else {
-        if ($_SESSION['role'] == 0) {
-            header('Location: employee.html');
-        }
+    } else if ($_SESSION['role'] == 0) {
+        header('Location: employee.html');
     }
+    
 
 ?>
 
@@ -66,11 +65,12 @@
                                     $result = $conn->query($sql);
                                     if (mysqli_num_rows($result)>0) {
                                         while ($row = mysqli_fetch_array($result)) {
-                                            echo "<form>";
+                                            echo "<form action='captures.php' method='post'>";
                                             echo "<tr>";
                                             echo "<td>" . $row['name'] . "</td>";
                                             echo "<td>";
                                             echo '<input type="hidden" name="accountID" value="' . $row['accountID'] . '" required>';
+                                            echo '<input type="hidden" name="name" value="' . $row['name'] . '" required>';
                                             echo '<input type="date" name="date" class="form-control" required>';
                                             echo '</td>';
                                             echo '<td class="text-center">';

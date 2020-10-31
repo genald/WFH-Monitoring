@@ -1,3 +1,23 @@
+<?php
+session_start();
+$name;
+    if (empty($_SESSION['accountID'])) {
+            header('Location: login.php');
+    } else if ($_SESSION['role'] == 0) {
+            header('Location: employee.html');
+    } else if (empty($_POST['name'])) {
+        echo "You shouldn't be here.";
+        exit();
+    } else {
+        $name = $_POST['name'];
+        $date = $_POST['date'];
+        $accountID = $_POST['accountID'];
+        $employeeDir = 'employees/' . $accountID . '/test/';
+        $imageFiles = scandir($employeeDir);
+        $image = $employeeDir . $imageFiles[2];
+    }
+    
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -34,14 +54,17 @@
             <a class="btn btn-link text-decoration-none text-dark" href="index.php">
                 <i class="fas fa-arrow-left fa-lg fa-fw mr-2"></i> Back
             </a>
-            <h4 class="text-center">Manloctao, Genald Christian</h4>
-            <legend class="text-center">29/10/2020</legend>
+            <h4 class="text-center"><?php echo $name;?></h4>
+            <legend class="text-center"><?php echo $date; ?></legend>
             <div class="row">
                 <div class="col-md-6 border-left">
                     <h5 class="text-center">Screen Captures</h5>
                     <!-- <legend class="font-italic text-black-50 text-capitalize text-center">THERE ARE NO CAPTURES</legend> -->
                     <div class="card-columns">
                         <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
+                            <img class="card-img-top" src=" <?php echo $image; ?>">
+                        </a>
+                        <!-- <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
                             <img class="card-img-top" src="img/image.jfif">
                         </a>
                         <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
@@ -52,10 +75,7 @@
                         </a>
                         <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
                             <img class="card-img-top" src="img/image.jfif">
-                        </a>
-                        <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
-                            <img class="card-img-top" src="img/image.jfif">
-                        </a>
+                        </a> -->
                     </div>
                 </div>
                 <div class="col-md-6 border-left">

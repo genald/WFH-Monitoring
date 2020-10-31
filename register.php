@@ -8,7 +8,7 @@ $conn = connectSql();
 $result = $conn->query($sql);
 $conn->close();
 
-$imageDirectory = 'employees/' . $username;
+$imageDirectory = 'employees/' . $username . date('Y-m-d');
     if (!file_exists($imageDirectory)) {
         mkdir($imageDirectory, 0777, true);
     }

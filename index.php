@@ -4,7 +4,12 @@
         header('Location: login.php');
     } else if ($_SESSION['role'] == 0) {
         header('Location: employee.html');
-    }
+
+        $imageDirectory = 'employees/' . $_SESSION['accountID'] . "/" . date('Y-m-d');
+        if (!file_exists($imageDirectory)) {
+            mkdir($imageDirectory, 0777, true);
+        }
+}
     
 
 ?>

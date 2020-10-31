@@ -1,7 +1,7 @@
 <?php
 include('config/config.php');
-$username = "Aeighy2";
-$name = "de Torres, Adrian Clark";
+$username = "Aeighy3";
+$name = "de Torres, Core";
 $hashed_password = password_hash("wfhPassword", PASSWORD_DEFAULT);
 $sql = "INSERT INTO useraccounts (accountID, name, password, role, managerID) VALUES ('$username', '$name', '$hashed_password', 0, 'adrian-manager')";
 $conn = connectSql();

@@ -57,7 +57,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <form>
+                                <!-- <form> -->
                                     <?php 
                                     include('config/config.php');
                                     $managerID = $_SESSION['accountID'];
@@ -66,6 +66,7 @@
                                     $result = $conn->query($sql);
                                     if (mysqli_num_rows($result)>0) {
                                         while ($row = mysqli_fetch_array($result)) {
+                                            echo "<form>";
                                             echo "<tr>";
                                             echo "<td>" . $row['name'] . "</td>";
                                             echo "<td>";
@@ -78,6 +79,7 @@
                                             echo '</button>';
                                             echo '</td>';
                                             echo '</tr>';
+                                            echo "</form>";
                                         }
                                     }
 
@@ -96,7 +98,7 @@
                                         </button>
                                     </td>
                                     </tr> -->
-                                </form>
+                                <!-- </form> -->
                             </tbody>
                         </table>
                     </div>

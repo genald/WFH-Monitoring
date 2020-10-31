@@ -12,7 +12,7 @@ $name;
         $name = $_POST['name'];
         $date = $_POST['date'];
         $accountID = $_POST['accountID'];
-        $employeeDir = 'employees/' . $accountID . '/test/';
+        $employeeDir = 'employees/' . $accountID . "/" .$date . "/";
         $imageFiles = scandir($employeeDir);
         $image = $employeeDir . $imageFiles[2];
     }

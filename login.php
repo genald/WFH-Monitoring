@@ -5,7 +5,7 @@ include('config/config.php');
         
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $sql = "SELECT accountID, password, role from useraccounts where accountID = '$username' ";
+        $sql = "SELECT accountID, name, password, role from useraccounts where accountID = '$username' ";
         $conn = connectSql();
         $result = $conn->query($sql);
         
@@ -15,6 +15,7 @@ include('config/config.php');
                     session_start();
                     $_SESSION['accountID'] = $username;
                     $_SESSION['role'] = $row['role'];
+                    $_SESSION['name'] = $row['name'];
                     header('Location: index.php');
                 } else {
                     $status = "0";

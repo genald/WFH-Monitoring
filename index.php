@@ -3,7 +3,7 @@
     if (empty($_SESSION['accountID'])) {
         header('Location: login.php');
     } else if ($_SESSION['role'] == 0) {
-        header('Location: employee.html');
+        header('Location: employee.php');
 
         $imageDirectory = 'employees/' . $_SESSION['accountID'] . "/" . date('Y-m-d');
         if (!file_exists($imageDirectory)) {

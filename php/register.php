@@ -1,12 +1,12 @@
 <?php
 include('../config/config.php');
-if (empty($_POST['name']) || empty($_POST['username'])) {
+if (empty($_POST['name']) || empty($_POST['username']) || empty($_POST['password'])) {
     exit();
 }
 session_start();
 $username = $_POST['username'];
 $name = $_POST['name'];
-$passworrd = $_POST['password'];
+$password = $_POST['password'];
 $sql = "SELECT accountID from useraccounts where accountID = '$username' ";
         $conn = connectSql();
         $result = $conn->query($sql);
@@ -29,9 +29,10 @@ $conn = connectSql();
 $result = $conn->query($sql);
 $conn->close();
 
-$imageDirectory = 'employees/' . $username . date('Y-m-d');
+$imageDirectory = '../employees/' . $username;
     if (!file_exists($imageDirectory)) {
         mkdir($imageDirectory, 0777, true);
+        // echo $password;
         header('Location: ../index.php');
     }
 

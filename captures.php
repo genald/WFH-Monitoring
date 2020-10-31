@@ -12,9 +12,11 @@ $name;
         $name = $_POST['name'];
         $date = $_POST['date'];
         $accountID = $_POST['accountID'];
-        $employeeDir = 'employees/' . $accountID . "/" .$date . "/";
-        $imageFiles = scandir($employeeDir);
-        $image = $employeeDir . $imageFiles[2];
+        $employeeDirCamera = 'employees/' . $accountID . "/" .$date . "/cameracapture/";
+        $employeeDirScreen = 'employees/' . $accountID . "/" .$date . "/screencapture/";
+        $imageFilesCamera = scandir($employeeDirCamera);
+        $imageFilesScreen = scandir($employeeDirScreen);
+        // $image = $employeeDir . $imageFiles[2];
     }
     
 ?>
@@ -58,12 +60,25 @@ $name;
             <legend class="text-center"><?php echo $date; ?></legend>
             <div class="row">
                 <div class="col-md-6 border-left">
-                    <h5 class="text-center">Screen Captures</h5>
+                    <h5 class="text-center">Camera Captures</h5>
                     <!-- <legend class="font-italic text-black-50 text-capitalize text-center">THERE ARE NO CAPTURES</legend> -->
                     <div class="card-columns">
-                        <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
+                        <!-- <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
+                            <img class="card-img-top" src=" <?php echo $image; ?>">
+                        </a> -->
+
+                        <?php
+                        foreach ($imageFilesCamera as $k => $v) {
+                            if ($k < 2) continue;
+                            $image = $employeeDirCamera . $imageFilesCamera[$k];
+                        ?>
+                            <a class="card border-0 shadow w-100" onclick='preview("<?php echo $image; ?>")' href="#">
                             <img class="card-img-top" src=" <?php echo $image; ?>">
                         </a>
+                        <?php
+                         }
+                         
+                        ?>
                         <!-- <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
                             <img class="card-img-top" src="img/image.jfif">
                         </a>
@@ -79,10 +94,23 @@ $name;
                     </div>
                 </div>
                 <div class="col-md-6 border-left">
-                    <h5 class="text-center">Camera Captures</h5>
+                    <h5 class="text-center">Screen Captures</h5>
                     <!-- <legend class="font-italic text-black-50 text-capitalize text-center">THERE ARE NO CAPTURES</legend> -->
                     <div class="card-columns">
-                        <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
+                        
+                    <?php
+                        foreach ($imageFilesScreen as $k => $v) {
+                            if ($k < 2) continue;
+                            $image = $employeeDirScreen . $imageFilesScreen[$k];
+                        ?>
+                            <a class="card border-0 shadow w-100" onclick='preview("<?php echo $image; ?>")' href="#">
+                            <img class="card-img-top" src=" <?php echo $image; ?>">
+                        </a>
+                        <?php
+                         }
+                         
+                        ?>
+                        <!-- <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
                             <img class="card-img-top" src="img/image.jfif">
                         </a>
                         <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
@@ -96,7 +124,7 @@ $name;
                         </a>
                         <a class="card border-0 shadow w-100" onclick='preview("img/image.jfif")' href="#">
                             <img class="card-img-top" src="img/image.jfif">
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>

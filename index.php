@@ -9,7 +9,7 @@
         if (!file_exists($imageDirectory)) {
             mkdir($imageDirectory, 0777, true);
         }
-}
+    }
     
 
 ?>

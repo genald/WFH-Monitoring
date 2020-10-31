@@ -9,7 +9,11 @@
     // date_timezone_set("Asia/Manila");
     date_default_timezone_set('Asia/Manila');
     $imageFile = date("h-ia") . ".png";
-    $imageDirectory = 'employees/' . $_SESSION['accountID'] . "/" . date('Y-m-d') . "/" .$imageFile;
+    $imageDirectory = 'employees/' . $_SESSION['accountID'] . "/" . date('Y-m-d') . "/cameracapture/";
+    if (!file_exists($imageDirectory)) {
+        mkdir($imageDirectory, 0777, true);
+    }
+    $imageDirectory = 'employees/' . $_SESSION['accountID'] . "/" . date('Y-m-d') . "/cameracapture/" .$imageFile;
     file_put_contents($imageDirectory, $data);
 
 ?>

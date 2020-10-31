@@ -40,7 +40,13 @@
                     <i class="fas fa-user-cog fa-lg fa-fw"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                    <a class="dropdown-item" href="php/logout.php">Logout</a>
+                    <a class="dropdown-item" href="settings.php">
+                        <i class="fas fa-cogs fa-fw"></i>
+                        Settings</a>
+                    <hr>
+                    <a class="dropdown-item" href="php/logout.php">
+                        <i class="fas fa-sign-out-alt fa-fw"></i>
+                        Logout</a>
                 </div>
             </div>
         </nav>
@@ -51,12 +57,18 @@
             <div class="row">
                 <div class="card border-0 shadow w-100">
                     <div class="card-body p-4">
-                        <h4 class="card-title">Employees</h4>
+                        <h4 class="card-title mb-3">
+                            Employees
+                            <a href="addEmployee.php" class="btn btn-primary float-right" >
+                                <i class="fas fa-plus fa-fw"></i>
+                                Add Employee
+                            </a>
+                        </h4>
                         <table class="table table-striped">
                             <thead class="thead-default">
                                 <tr class="bg-dark text-light">
                                     <th>Employee</th>
-                                    <th>Date</th>
+                                    <th>Screen & Camera Captures</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -70,21 +82,28 @@
                                     $result = $conn->query($sql);
                                     if (mysqli_num_rows($result)>0) {
                                         while ($row = mysqli_fetch_array($result)) {
-                                            echo "<form action='captures.php' method='post'>";
                                             echo "<tr>";
                                             echo "<td>" . $row['name'] . "</td>";
                                             echo "<td>";
+                                            echo "<form action='captures.php' method='post'>";
                                             echo '<input type="hidden" name="accountID" value="' . $row['accountID'] . '" required>';
-                                            echo '<input type="hidden" name="name" value="' . $row['name'] . '" required>';
+                                            echo '<input type="hidden" name="name" value="' . $row['name'] . '" required>';                                            
+                                            echo '<div class="input-group">';
                                             echo '<input type="date" name="date" class="form-control" required>';
+                                            echo '<div class="input-group-append">';
+                                            echo '<button class="input-group-text btn btn-info">';
+                                            echo '<i class="fas fa-image fa-fw"></i> View Captures';
+                                            echo '</button>';
+                                            echo '</div>';
+                                            echo '</div>';
+                                            echo "</form>";
                                             echo '</td>';
                                             echo '<td class="text-center">';
-                                            echo '<button type="submit" class="btn btn-info text-decoration-none">';
-                                            echo '<i class="fas fa-image fa-fw"></i> View Captures';
+                                            echo '<button type="button" class="btn btn-danger" onclick="deleteEmployee(\''.$row['accountID'].'\')">';
+                                            echo '<i class="fas fa-trash fa-fw"></i> Delete Employee';
                                             echo '</button>';
                                             echo '</td>';
                                             echo '</tr>';
-                                            echo "</form>";
                                         }
                                     }
 
@@ -95,11 +114,23 @@
                                     <td> Manloctao, Genald Christian </td>
                                     <td>
                                         <input type="hidden" name="employee" required>
-                                        <input type="date" name="date" class="form-control" required>
+                                        
+                                        <div class="input-group">
+                                            <input type="date" name="date" class="form-control" required>
+                                            <div class="input-group-append">
+                                                <button class="input-group-text btn btn-info">
+                                                    <i class="fas fa-image fa-fw"></i> View Captures
+                                                </button>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td class="text-center">
                                         <button type="submit" class="btn btn-info text-decoration-none">
                                             <i class="fas fa-image fa-fw"></i> View Captures
+                                        </button>
+                                        <span class="mx-2"></span>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modelID" onclick="delete()">
+                                        <i class="fas fa-trash fa-fw"></i> Delete Employee
                                         </button>
                                     </td>
                                     </tr> -->
@@ -112,6 +143,30 @@
         </div>
         <!-- /BODY -->
 
+        <!-- DELETE Modal -->
+        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Employee</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <!-- DELETE FORM -->
+                    <form method="POST" action="delete.php">
+                        <div class="modal-body">
+                            <input type="hidden" name="id" id="deleteId">
+                            Are you sure you want to delete employee?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" >No</button>
+                            <button type="submit" class="btn btn-danger">Yes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -124,5 +179,6 @@
         <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
         
         <script src="js/preview.js"></script>
+        <script src="js/delete.js"></script>
     </body>
 </html>

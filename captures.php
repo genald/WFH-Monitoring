@@ -50,7 +50,13 @@ $name;
                     <i class="fas fa-user-cog fa-lg fa-fw"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                    <a class="dropdown-item" href="php/logout.php">Logout</a>
+                    <a class="dropdown-item" href="settings.php">
+                        <i class="fas fa-cogs fa-fw"></i>
+                        Settings</a>
+                    <hr>
+                    <a class="dropdown-item" href="php/logout.php">
+                        <i class="fas fa-sign-out-alt fa-fw"></i>
+                        Logout</a>
                 </div>
             </div>
         </nav>

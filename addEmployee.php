@@ -63,10 +63,17 @@
                         <h4 class="car-title">New Employee</h4>
                     </div>
                     <div class="card-body p-4">
-                        <div class="alert alert-danger" role="alert">
-                            <strong>Username is already taken.<br>Choose another one.</strong>
-                        </div>
-                        <form method="post" class="needs-validation" novalidate>
+                            <?php
+                                if (!empty($_SESSION['usernameerror'])) {
+                                    echo '<div class="alert alert-danger" role="alert">';
+                                    echo "<strong>Username is already taken.<br>Choose another one.</strong>";
+                                    echo '</div>';
+                                    unset($_SESSION['usernameerror']);
+                                } 
+
+                            ?>
+                            
+                        <form method="post" action="php/register.php" class="needs-validation" novalidate>
                             <div class="form-group mb-4">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" id="name" class="form-control" placeholder="Name" required>
@@ -79,12 +86,10 @@
                                 <label for="password">Password</label>
                                 <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                             </div>
-                        </form>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary btn-block">
+                            <button type="submit" class="btn btn-primary btn-block">
                             Submit
-                        </button>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

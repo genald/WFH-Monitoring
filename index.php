@@ -154,9 +154,9 @@
                             </button>
                     </div>
                     <!-- DELETE FORM -->
-                    <form method="POST" action="delete.php">
+                    <form method="POST" action="php/delete.php">
                         <div class="modal-body">
-                            <input type="hidden" name="id" id="deleteId">
+                            <input type="hidden" name="id" value= "deleteId" id="deleteId">
                             Are you sure you want to delete employee?
                         </div>
                         <div class="modal-footer">

@@ -14,8 +14,13 @@ $name;
         $accountID = $_POST['accountID'];
         $employeeDirCamera = 'employees/' . $accountID . "/" .$date . "/cameracapture/";
         $employeeDirScreen = 'employees/' . $accountID . "/" .$date . "/screencapture/";
-        $imageFilesCamera = scandir($employeeDirCamera);
-        $imageFilesScreen = scandir($employeeDirScreen);
+        if (is_dir($employeeDirCamera) && is_dir($employeeDirScreen)) {
+            $imageFilesCamera = scandir($employeeDirCamera);
+            $imageFilesScreen = scandir($employeeDirScreen);
+        } else {
+            echo "This dude doesn't have anything yet.";
+            exit();
+        }
         // $image = $employeeDir . $imageFiles[2];
     }
     

@@ -1,9 +1,15 @@
 <?php
 session_start();
+include('php/deleteOld.php');
 $name = $_SESSION['name'];
     if (empty($_SESSION['accountID'])) {
             header('Location: login.php');
+            exit();
     }
+    $id = $_SESSION['accountID'];
+    $path = 'employees/' . $id;
+    removeOld($path);
+
 ?>
 <!doctype html>
 <html lang="en">
